@@ -17,53 +17,61 @@ java Filename
 ```
 
 ## Problem 1
-Debug the code provided in the starter file so it does the following:
+Write a method named `printRandom3()` that takes in a positive integer `n`, then prints 3 random integers from 2 to `n`+2 inclusive using `Math.random()`.
 
-* creates an int with the maximum possible value
-* increases this int by 1
-* prints the result
-* creates an int with the minimum possible value
-* decreases this int by 1
-* prints the result
+Note: Make sure your minimum output is 2 or more and make sure your maximum output is only up to n + 2 (so if user inputs 5, the maximum output should only be 7).
+
+Hint: Knowing your PEMDAS will help a lot.
+
+Sample Run:
+```
+Enter a positive integer:
+6
+Random numbers:
+7
+2
+5
+```
 
 ## Problem 2
-Debug the code provided in the starter file so it does the following:
+Write a function named `calcSlope()` that calculates the slope between two coordinates: `(x1, y1)` and `(x2, y2)`. The function should take four decimal inputs, in the order of `x1`, `x2`, `y1`, `y2`. Then print the slope.
 
-* creates two `Integer` objects x and y
-* sets x and y to inputs entered by the user
-* finds the average of the two values and stores this in a `Double` value `avg`
-* prints a sentence as shown in the sample run with the values of x, y and the average
+Hint: Just find 4 points and plug in the formula.
+
+The slope formula is
+
+$$ \dfrac{y1 - y1}{x2-x1} $$
 
 Sample run:
 ```
-Enter values:
->5
->12
-Average of 5 and 12 is 8.5
+Enter the first x-coordinate:
+3.9
+Enter the second x-coordinate:
+5.1
+Enter the first y-coordinate:
+4.8
+Enter the second y-coordinate:
+1.2
+Slope: -3.0000000000000004
 ```
 
 ## Problem 3
-Debug the code provided in the starter file so it does the following:
+Write a method named `roundedDist()` which should take two doubles as inputs, and calculates the distance between them.  It then rounds the distance to the nearest integer. The answer should be a positive integer regardless of the order in which the doubles are entered.
 
-* creates an Integer object named sides
-* creates a Double object named length
-* gets inputs from the user for each of these objects
-* creates a RegularPolygon object p1, with the sides and length value
-* creates a second RegularPolygon, p2, with twice the side length of p1, and one more side than p1
-* prints the details and areas of p1 and p2 on separate lines
-
-Reference the sample run below to see what a run looks like when the code is running correctly.
-
-Sample run:
+Sample run 1:
 ```
-Enter number of sides:
-> 4
-Enter side length:
-> 2.5
-The area of a square with side length 2.5 is: 6.250000000000001
-The area of a regular pentagon with side length 5.0 is: 43.01193501472417
+Enter two doubles:
+>2.2
+>9.6
+Distance: 7
 ```
-
+Sample run 2:
+```
+Enter two doubles:
+>-4.5
+>12.56
+Distance: 17
+```
 ## Sample Solutions
 ```java
 import java.util.Scanner;
@@ -72,26 +80,47 @@ public class Main
 {
 	public static void main(String[] args)
 	{
-		// Problem 2
 		Scanner sc = new Scanner(System.in);
-		int numSide;
-		double sideLength;
-		RegularPolygon rp;
 
-		System.out.println("Enter number of sides:");
-		numSide = sc.nextInt();
+		// problem 1
+		System.out.println("Enter a positive integer");
+		int N = sc.nextInt();
+		printRandom3(N);
 
-		System.out.println("Enter the side length:");
-		sideLength = sc.nextDouble();
+		// problem 2
+		System.out.println("Enter values for x1, x2, y1, y2 in that order")
+		double x1 = sc.nextDouble();
+		double x2 = sc.nextDouble();
+		double y1 = sc.nextDouble();
+		double y2 = sc.nextDouble();
+		System.out.println("Slope: " + calcSlope(x1, x2, y1, y2));
 
-		rp = new RegularPolygon(numSide, sideLength);
+		// problem 3
+		System.out.println("Enter two doubles");
+		double d1 = sc.nextDouble();
+		double d2 = sc.nextDouble();
+		System.out.println("Distance: " + roundedDist(d1, d2));
+	}
 
-		System.out.println("Area with " + rp.getNumSides() + " sides: " + rp.getArea());
-		
-		rp.addSides(2);
-		System.out.println("Incrementing the number of sides by two");
-		
-		System.out.println("Area with " + rp.getNumSides() + " sides: " + rp.getArea());
+	public static void printRandom3(int num)
+	{
+		int m = n + 1;
+
+    System.out.println( (int) ((Math.random() * m) + 2) );
+    System.out.println( (int) ((Math.random() * m) + 2) );
+    System.out.println( (int) ((Math.random() * m) + 2) );
+	}
+
+	public static double calcSlope(double x1, double x2, double y1, double y2)
+	{
+		return (y2-y1)/(x2-x1);
+	}
+
+	public static int roundedDist(double a, double b)
+	{
+		double dist = Math.abs(b - a);
+		int rounded = (int) (dist + 0.5);
+		return rounded;
 	}
 }
 ```
